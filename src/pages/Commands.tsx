@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Commands = () => {
-  const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1437785611455959060&permissions=4292493394837495&response_type=code&redirect_uri=https%3A%2F%2Fecho-bot-starter-production.up.railway.app%2F&integration_type=0&scope=bot+applications.commands+messages.read+activities.write+relationships.read+activities.read+guilds+guilds.members.read+gdm.join+guilds.join+guilds.channels.read";
+  const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1437785611455959060&permissions=4292492855868919&response_type=code&redirect_uri=https%3A%2F%2Fdiscord.com%2Foauth2%2Fauthorized&integration_type=0&scope=bot+applications.commands+messages.read+guilds+guilds.members.read+guilds.join+guilds.channels.read";
 
   const [searchTerm, setSearchTerm] = useState("");
 
