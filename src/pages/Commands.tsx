@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Terminal, Shield, Settings, Users, MessageSquare, Zap, Bell, Target } from "lucide-react";
+import { ArrowLeft, Terminal, Shield, Settings, Users, MessageSquare, Zap, Bell, Target, Wand2, Smile, Scroll } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -12,90 +12,151 @@ const Commands = () => {
 
   const commandCategories = [
     {
-      title: "Setup Commands",
-      description: "Configure and manage your bot settings",
+      title: "🎨 Basic Commands",
+      description: "Essential bot commands",
+      icon: MessageSquare,
+      color: "text-blue-500",
+      commands: [
+        { name: "/help", description: "Show all available commands", usage: "/help", permission: "Everyone" },
+        { name: "/ping", description: "Check bot latency", usage: "/ping", permission: "Everyone" },
+        { name: "/info", description: "Bot information and stats", usage: "/info", permission: "Everyone" },
+        { name: "/serverinfo", description: "Server information", usage: "/serverinfo", permission: "Everyone" },
+        { name: "/userinfo", description: "User information", usage: "/userinfo [@user]", permission: "Everyone" },
+      ]
+    },
+    {
+      title: "⚙️ Settings & Configuration",
+      description: "Configure server settings",
       icon: Settings,
       color: "text-blue-500",
       commands: [
-        { name: "/quicksetup", description: "Instantly configure all essential bot features", usage: "/quicksetup", permission: "Server Owner" },
-        { name: "/personality-set", description: "Define how the bot speaks and responds", usage: "/personality-set [personality]", permission: "Server Owner" },
-        { name: "/reset", description: "Clear all server settings and start fresh", usage: "/reset", permission: "Server Owner" },
-        { name: "/wipe-config", description: "Remove all configuration data", usage: "/wipe-config", permission: "Server Owner" },
+        { name: "/settings", description: "View current server settings", usage: "/settings", permission: "Server Owner" },
+        { name: "/dashboard", description: "View AI engagement dashboard", usage: "/dashboard", permission: "Server Owner" },
+        { name: "/quicksetup", description: "Quick setup wizard for new servers", usage: "/quicksetup", permission: "Server Owner" },
       ]
     },
     {
-      title: "Moderation Commands",
-      description: "Manage server rules and user actions",
-      icon: Shield,
-      color: "text-red-500",
+      title: "🧠 Personality System",
+      description: "Manage bot personality and responses",
+      icon: Wand2,
+      color: "text-purple-500",
       commands: [
-        { name: "/strike", description: "Issue a warning strike to a user", usage: "/strike @user [reason]", permission: "Moderator+" },
-        { name: "/ban", description: "Ban a user from the server", usage: "/ban @user [reason]", permission: "Moderator+" },
-        { name: "/unban", description: "Unban a previously banned user", usage: "/unban @user", permission: "Moderator+" },
-        { name: "/warnings", description: "View a user's warning history", usage: "/warnings @user", permission: "Moderator+" },
-        { name: "/moderation-log", description: "View moderation action logs", usage: "/moderation-log [limit]", permission: "Moderator+" },
+        { name: "/personality_set", description: "Set server personality (Owner only)", usage: "/personality_set <style>", permission: "Server Owner" },
+        { name: "/personality_view", description: "View current server personality", usage: "/personality_view", permission: "Everyone" },
       ]
     },
     {
-      title: "Engagement Commands",
-      description: "Create polls, events, and interactive content",
+      title: "🤖 AI Engagement",
+      description: "Control AI engagement features",
       icon: Zap,
       color: "text-yellow-500",
       commands: [
-        { name: "/poll", description: "Create a server poll", usage: "/poll \"Question\" [option1] [option2]", permission: "Moderator+" },
-        { name: "/event", description: "Schedule a server event", usage: "/event \"Event Name\" [date/time]", permission: "Moderator+" },
-        { name: "/engagement-toggle", description: "Enable/disable AI engagement", usage: "/engagement-toggle [on/off]", permission: "Server Owner" },
-        { name: "/interactive-moment", description: "Trigger an interactive community moment", usage: "/interactive-moment [type]", permission: "Moderator+" },
+        { name: "/engagement enable", description: "Enable AI engagement", usage: "/engagement enable", permission: "Server Owner" },
+        { name: "/engagement disable", description: "Disable AI engagement", usage: "/engagement disable", permission: "Server Owner" },
+        { name: "/engagement channel", description: "Set engagement channel", usage: "/engagement channel #ch", permission: "Server Owner" },
+        { name: "/engagement test", description: "Test AI response", usage: "/engagement test", permission: "Moderator+" },
+        { name: "/engagement cooldown", description: "Set user cooldown (30-120s)", usage: "/engagement cooldown", permission: "Server Owner" },
+        { name: "/engagement speed", description: "Set response delay (0-30s)", usage: "/engagement speed", permission: "Server Owner" },
+        { name: "/engagement blacklist", description: "Block a channel from AI", usage: "/engagement blacklist", permission: "Server Owner" },
+        { name: "/engagement unblacklist", description: "Unblock a channel", usage: "/engagement unblacklist", permission: "Server Owner" },
+        { name: "/engagement quiet", description: "Set quiet hours (0-23)", usage: "/engagement quiet", permission: "Server Owner" },
+        { name: "/engagement unquiet", description: "Remove quiet hours", usage: "/engagement unquiet", permission: "Server Owner" },
+        { name: "/engagement resetstats", description: "Reset statistics (Owner only)", usage: "/engagement resetstats", permission: "Server Owner" },
       ]
     },
     {
-      title: "Welcome Commands",
-      description: "Customize member greetings and onboarding",
+      title: "👋 Welcome System",
+      description: "Customize welcome messages",
       icon: Users,
       color: "text-green-500",
       commands: [
-        { name: "/welcome-message", description: "Set custom welcome message", usage: "/welcome-message \"Your message\"", permission: "Server Owner" },
-        { name: "/welcome-image", description: "Set welcome image banner", usage: "/welcome-image [image_url]", permission: "Server Owner" },
-        { name: "/welcome-channel", description: "Set welcome message channel", usage: "/welcome-channel #channel", permission: "Server Owner" },
-        { name: "/goodbye-message", description: "Set custom goodbye message", usage: "/goodbye-message \"Your message\"", permission: "Server Owner" },
+        { name: "/welcome test", description: "Test welcome message", usage: "/welcome test", permission: "Server Owner" },
+        { name: "/welcome enable", description: "Enable welcome messages", usage: "/welcome enable", permission: "Server Owner" },
+        { name: "/welcome disable", description: "Disable welcome messages", usage: "/welcome disable", permission: "Server Owner" },
+        { name: "/welcome channel", description: "Set welcome channel", usage: "/welcome channel #ch", permission: "Server Owner" },
       ]
     },
     {
-      title: "Leveling System",
-      description: "Manage XP, roles, and member progression",
+      title: "🛡️ Moderation",
+      description: "Server moderation tools",
+      icon: Shield,
+      color: "text-red-500",
+      commands: [
+        { name: "/ban", description: "Ban a user", usage: "/ban @user [reason]", permission: "Moderator+" },
+        { name: "/kick", description: "Kick a user", usage: "/kick @user [reason]", permission: "Moderator+" },
+        { name: "/timeout", description: "Timeout a user", usage: "/timeout @user [time]", permission: "Moderator+" },
+        { name: "/warn", description: "Warn a user", usage: "/warn @user [reason]", permission: "Moderator+" },
+        { name: "/warnings", description: "View user warnings", usage: "/warnings @user", permission: "Moderator+" },
+        { name: "/clearwarnings", description: "Clear user warnings", usage: "/clearwarnings @user", permission: "Moderator+" },
+        { name: "/purge", description: "Delete messages (1-100)", usage: "/purge <amount>", permission: "Moderator+" },
+      ]
+    },
+    {
+      title: "📊 Leveling System",
+      description: "Manage XP and ranks",
       icon: Target,
       color: "text-purple-500",
       commands: [
-        { name: "/leveling-toggle", description: "Enable/disable XP leveling system", usage: "/leveling-toggle [on/off]", permission: "Server Owner" },
-        { name: "/auto-role", description: "Configure automatic role assignments", usage: "/auto-role @role [level]", permission: "Server Owner" },
-        { name: "/rank", description: "Check your or another user's rank", usage: "/rank [@user]", permission: "Everyone" },
-        { name: "/leaderboard", description: "View server XP leaderboard", usage: "/leaderboard", permission: "Everyone" },
-        { name: "/xp-add", description: "Manually add XP to a user", usage: "/xp-add @user [amount]", permission: "Moderator+" },
+        { name: "/rank", description: "View rank card", usage: "/rank [@user]", permission: "Everyone" },
+        { name: "/leaderboard", description: "Server leaderboard", usage: "/leaderboard", permission: "Everyone" },
+        { name: "/setlevel", description: "Set user level (Admin)", usage: "/setlevel @user <level>", permission: "Moderator+" },
+        { name: "/addxp", description: "Add XP to user (Admin)", usage: "/addxp @user <amount>", permission: "Moderator+" },
       ]
     },
     {
-      title: "Rule System",
-      description: "Configure and enforce server rules",
+      title: "🎭 Auto Roles",
+      description: "Automatic role assignment",
+      icon: Users,
+      color: "text-blue-500",
+      commands: [
+        { name: "/autorole add", description: "Add role on join", usage: "/autorole add", permission: "Server Owner" },
+        { name: "/autorole remove", description: "Remove auto role", usage: "/autorole remove", permission: "Server Owner" },
+        { name: "/autorole list", description: "List auto roles", usage: "/autorole list", permission: "Everyone" },
+      ]
+    },
+    {
+      title: "📊 Polls",
+      description: "Create and manage polls",
       icon: Bell,
       color: "text-orange-500",
       commands: [
-        { name: "/rule-add", description: "Add a new server rule", usage: "/rule-add [rule_text]", permission: "Server Owner" },
-        { name: "/rule-remove", description: "Remove an existing rule", usage: "/rule-remove [rule_number]", permission: "Server Owner" },
-        { name: "/rule-list", description: "Display all server rules", usage: "/rule-list", permission: "Everyone" },
-        { name: "/rules-channel", description: "Set rules announcement channel", usage: "/rules-channel #channel", permission: "Server Owner" },
+        { name: "/poll create", description: "Create a poll", usage: "/poll create", permission: "Moderator+" },
+        { name: "/poll end", description: "End a poll", usage: "/poll end <id>", permission: "Moderator+" },
+        { name: "/poll results", description: "View poll results", usage: "/poll results <id>", permission: "Everyone" },
       ]
     },
     {
-      title: "Utility Commands",
-      description: "General bot and server utilities",
-      icon: Terminal,
+      title: "🎮 Entertainment",
+      description: "Fun and entertainment commands",
+      icon: Smile,
+      color: "text-pink-500",
+      commands: [
+        { name: "/8ball", description: "Magic 8-ball", usage: "/8ball <question>", permission: "Everyone" },
+        { name: "/coinflip", description: "Flip a coin", usage: "/coinflip", permission: "Everyone" },
+        { name: "/dice", description: "Roll dice", usage: "/dice [sides]", permission: "Everyone" },
+        { name: "/joke", description: "Random joke", usage: "/joke", permission: "Everyone" },
+        { name: "/meme", description: "Random meme", usage: "/meme", permission: "Everyone" },
+      ]
+    },
+    {
+      title: "✍️ AI Assistance",
+      description: "AI-powered text assistance",
+      icon: Wand2,
+      color: "text-cyan-500",
+      commands: [
+        { name: "!rewrite", description: "AI rewrite message (calmer tone)", usage: "!rewrite <message>", permission: "Everyone" },
+        { name: "!assist", description: "Ask AI for help", usage: "!assist <question>", permission: "Everyone" },
+      ]
+    },
+    {
+      title: "📝 Logging",
+      description: "View moderation logs",
+      icon: Scroll,
       color: "text-gray-500",
       commands: [
-        { name: "/help", description: "Show all available commands", usage: "/help", permission: "Everyone" },
-        { name: "/stats", description: "Display server statistics", usage: "/stats", permission: "Everyone" },
-        { name: "/bot-info", description: "Show bot information and status", usage: "/bot-info", permission: "Everyone" },
-        { name: "/rephrase", description: "Rephrase a rude message politely", usage: "/rephrase [message]", permission: "Moderator+" },
-        { name: "/ping", description: "Check bot response time", usage: "/ping", permission: "Everyone" },
+        { name: "/logs view", description: "View moderation logs", usage: "/logs view", permission: "Moderator+" },
+        { name: "/logs search", description: "Search logs", usage: "/logs search <query>", permission: "Moderator+" },
+        { name: "/logs user", description: "User moderation history", usage: "/logs user @user", permission: "Moderator+" },
       ]
     }
   ];
@@ -123,7 +184,7 @@ const Commands = () => {
             <span className="gradient-text">Bot Commands</span> Reference
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Complete list of MyHarmony bot commands organized by category.
+            Complete list of Harmony Bot commands organized by category.
             Filter commands to find exactly what you need.
           </p>
         </div>
@@ -200,12 +261,12 @@ const Commands = () => {
               Ready to <span className="gradient-text">Enhance Your Server?</span>
             </h3>
             <p className="text-muted-foreground mb-6">
-              Add MyHarmony to your Discord server and start using these powerful commands today!
+              Add Harmony Bot to your Discord server and start using these powerful commands today!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-primary hover:bg-primary/90 glow-primary" asChild>
                 <a href={DISCORD_OAUTH_URL} target="_blank" rel="noopener noreferrer">
-                  Invite MyHarmony
+                  Invite Harmony Bot
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10" asChild>
