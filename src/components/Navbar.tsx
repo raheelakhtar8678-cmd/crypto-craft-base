@@ -9,7 +9,7 @@ const Navbar = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1437785611455959060&permissions=4292492855868919&response_type=code&redirect_uri=https%3A%2F%2Fdiscord.com%2Foauth2%2Fauthorized&integration_type=0&scope=bot+applications.commands+messages.read+guilds+guilds.members.read+guilds.join+guilds.channels.read";
+  const DISCORD_OAUTH_URL = "https://discord.com/oauth2/authorize?client_id=1437785611455959060&permissions=4292492855868919&response_type=code&redirect_uri=https%3A%2F%2Fdiscord.com%2Foauth2%2Fauthorize&integration_type=0&scope=bot+applications.commands+messages.read";
 
   const navLinks = [
     { path: "/", label: "Home", icon: MessageSquare },
